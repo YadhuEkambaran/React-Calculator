@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Calculator
+
+- First commit only contains the basic operation.
 
 ## Available Scripts
 
