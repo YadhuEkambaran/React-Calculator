@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#root {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#yadhu {
+  width: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-header {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.c-result {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+
+.box-result {
+  font-weight: bold;
+}
+
+.c-equal {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  width: 100px;
+  height: 80px;
+  margin: auto;
+  font-size: large;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0;
+  border-style: none;
+}

@@ -3,7 +3,7 @@ import Box from "./box";
 
 class CalculatorLayout extends Component {
   state = {
-    values: ["C", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "*", "/", "+", "-", "="],
+    values: ["C", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "*", "/", "+", "-"],
     leftValue: null,
     rightValue: null,
     operation: null,
@@ -12,10 +12,24 @@ class CalculatorLayout extends Component {
 
   render() {
     return (
-      <div>
-        <h1 key="c_header">Calculators</h1>
-        <div key="c_values">{this.generateBoxes()}</div>
-        <div key="c_result">{"Result = " + this.state.result}</div>
+      <div className="main-container">
+        <h1 key="c_header" className="c-header">
+          Calculators
+        </h1>
+        <div key="c_result" className="c-result">
+          <Box value={this.state.result} className="box-result"></Box>
+        </div>
+        <div key="c_values" className="box-container">
+          {this.generateBoxes()}
+        </div>
+        <div key="c_equal" className="c-equal">
+          <Box
+            onClick={() => {
+              this.handleClick("=");
+            }}
+            value="="
+          ></Box>
+        </div>
       </div>
     );
   }
@@ -36,32 +50,34 @@ class CalculatorLayout extends Component {
       if (i % 3 == 0) {
         boxes.push(<div key={"index_" + i}></div>);
       }
+
       i += 1;
     });
     return boxes;
   }
 
   getResult() {
+    let tempResult;
     if (
       !(this.state.leftValue && this.state.operation && this.state.rightValue)
     ) {
-      this.state.result = 0;
+      tempResult = 0;
     } else {
       if (this.state.operation == "+") {
-        this.state.result =
+        tempResult =
           parseInt(this.state.leftValue) + parseInt(this.state.rightValue);
       } else if (this.state.operation == "-") {
-        this.state.result =
+        tempResult =
           parseInt(this.state.leftValue) - parseInt(this.state.rightValue);
       } else if (this.state.operation == "*") {
-        this.state.result =
+        tempResult =
           parseInt(this.state.leftValue) * parseInt(this.state.rightValue);
       } else if (this.state.operation == "/") {
-        this.state.result =
+        tempResult =
           parseInt(this.state.leftValue) / parseInt(this.state.rightValue);
       }
 
-      this.setState(this.state);
+      this.setState({ result: tempResult });
 
       console.log("------- LEFT      ----- " + this.state.leftValue);
       console.log("------- OPERATION ----- " + this.state.operation);
@@ -79,28 +95,29 @@ class CalculatorLayout extends Component {
       } else if (value == "C") {
         this.reset();
       } else {
-        this.state.operation = value;
+        this.setState({ operation: value });
       }
     } else {
       if (this.state.leftValue) {
-        this.state.rightValue = value;
+        this.setState({ rightValue: value });
       } else {
         this.reset();
-        this.state.leftValue = value;
+        this.setState({ leftValue: value });
       }
     }
   }
 
   reset() {
     this.resetValues();
-    this.state.result = 0;
-    this.setState(this.state);
+    this.setState({ result: 0 });
   }
 
   resetValues() {
-    this.state.leftValue = null;
-    this.state.rightValue = null;
-    this.state.operation = null;
+    this.setState({
+      leftValue: null,
+      rightValue: null,
+      operation: null,
+    });
   }
 }
 
